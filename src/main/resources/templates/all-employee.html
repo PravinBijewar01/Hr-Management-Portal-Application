@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+  <h4 style="text-align: center;">All Employee</h4>
+  <hr>
+  <div class="container-fluid mt-3 table-tesponsive">
+     
+     
+     <table id="example" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>EMP ID</th> 
+            <th>Employee Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Joining Date</th>
+            <th>Mobile Number</th>
+            <th>Aadhaar Number</th>
+            <th>Account Number</th>
+            <th>Department</th>
+            <th>Previous Company</th>
+            <th>PF Number</th>
+            <th>Salary</th>
+            <th>Current Address</th>
+            <th>Permanent Address</th>
+			<th>Role</th>
+            <th>Active</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="e : ${allEmployee}">
+            <td th:text="'HMP'+${e.id}"></td>
+            <td th:text="${e.employeeName}"></td>
+            <td th:text="${e.email}"></td>
+            <td th:text="${e.gender}"></td>
+            <td th:text="${e.dateOfBirth}"></td>
+            <td th:text="${e.joinDate}"></td>
+            <td th:text="${e.mobileNumber}"></td>
+            <td th:text="${e.aadhaarNumber}"></td>
+            <td th:text="${e.accountNumber}"></td>
+            <td th:text="${e.department}"></td>
+            <td th:text="${e.previousCompany}"></td>
+            <td th:text="${e.pfNumber}"></td>
+            <td th:text="${e.salary}"></td>
+            <td th:text="${e.currentAddress}"></td>
+            <td th:text="${e.permanrntAddress}"></td>
+			<td th:text="${e.role}"></td>
+            <td th:text="${e.active}"></td>
+            <td> 
+             <a th:onclick="|editRecord(${e.id})|" style="color: blue; cursor: pointer;" class="fa-solid fa-pen-to-square ms-2"></a>
+             <i th:onclick="|deleteRecordById(${e.id})|" style="color: red; cursor: pointer;" class="fas fa-trash ms-2"></i>
+            </td>
+        </tr>
+       </tbody>
+      </table>
+     
+  </div>
+  
+</section>
+ 
+</body>
+</html>

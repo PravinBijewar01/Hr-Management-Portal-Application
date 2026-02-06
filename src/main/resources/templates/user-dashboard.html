@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" th:replace="~{user-base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+
+	<!-- =================== DEPARTMENT COUNTS =================== -->
+	  <div class="row">
+
+	      <div class="col-6 col-sm-2 mt-2" th:each="d : ${
+	          {
+	           'Development=' + devCount,
+	           'QA Testing=' + qaCount,
+	           'Networking=' + netCount,
+	           'HR Team=' + hrCount,
+	           'Security=' + secCount,
+	           'Sales Market=' + salesCount
+	          }
+	      }">
+	          <div class="card">
+	              <div class="card-body text-center">
+	                  <b th:text="${d}">Department [0]</b>
+	              </div>
+	          </div>
+	      </div>
+
+	  </div>
+
+	  <!-- =================== STATUS COUNTS =================== -->
+	  <div class="row mt-2">
+
+	      <div class="col-6 col-sm-2 mt-2">
+	          <div class="card">
+	              <div class="card-body bg-warning text-center">
+	                  <b>Pending [<span th:text="${pendingCount}">0</span>]</b>
+	              </div>
+	          </div>
+	      </div>
+
+	      <div class="col-6 col-sm-2 mt-2">
+	          <div class="card">
+	              <div class="card-body bg-success text-white text-center">
+	                  <b>Approved [<span th:text="${approvedCount}">0</span>]</b>
+	              </div>
+	          </div>
+	      </div>
+
+	      <div class="col-6 col-sm-2 mt-2">
+	          <div class="card">
+	              <div class="card-body bg-info text-white text-center">
+	                  <b>Canceled [<span th:text="${canceledCount}">0</span>]</b>
+	              </div>
+	          </div>
+	      </div>
+
+	      <div class="col-6 col-sm-2 mt-2">
+	          <div class="card">
+	              <div class="card-body bg-danger text-white text-center">
+	                  <b>Denied [<span th:text="${deniedCount}">0</span>]</b>
+	              </div>
+	          </div>
+	      </div>
+
+	      <div class="col-6 col-sm-2 mt-2">
+	          <div class="card">
+	              <div class="card-body bg-primary text-white text-center">
+	                  <b>All [<span th:text="${allCount}">0</span>]</b>
+	              </div>
+	          </div>
+	      </div>
+
+	  </div>
+
+	  <!-- =================== MAIN CONTENT =================== -->
+	  <div class="row mt-4 mb-5">
+  <!-- End Above Status -->
+  
+  <!-- =================== RECENT ACTIVITY =================== -->
+         <div class="col-md-8">
+             <div class="card">
+                 <div class="card-body">
+                     <h5>Recent Activity</h5>
+                     <hr>
+
+                     <table class="table table-bordered table-striped">
+                         <thead>
+                         <tr>
+                             <th>#</th>
+                             <th>Subject</th>
+                             <th>Description</th>
+                             <th>Date</th>
+                             <th>Status</th>
+                         </tr>
+                         </thead>
+
+                         <tbody>
+                         <tr th:each="e, i : ${statusList}">
+                             <td th:text="${i.index + 1}">1</td>
+                             <td th:text="${e.subject}">Subject</td>
+                             <td th:text="${e.text}">Description</td>
+                             <td th:text="${e.addedDate}">Date</td>
+                             <td>
+                                 <span th:text="${e.status}"
+                                       th:classappend="
+                                       ${e.status=='PENDING'} ? 'text-warning' :
+                                       (${e.status=='APPROVED'} ? 'text-success' :
+                                       (${e.status=='DENIED'} ? 'text-danger' : 'text-info'))">
+                                 </span>
+                             </td>
+                         </tr>
+
+                         <tr th:if="${#lists.isEmpty(statusList)}">
+                             <td colspan="5" class="text-center text-muted">
+                                 No recent activity found
+                             </td>
+                         </tr>
+
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+         </div>
+	 
+	 
+	 
+	 
+	 
+     
+		 <!-- =================== UPCOMING BIRTHDAY =================== -->
+		       <div class="col-md-4">
+		           <div class="card">
+		               <div class="card-body">
+		                   <h5>Upcoming Birthday / Anniversary</h5>
+		                   <hr>
+
+		                   <div th:each="emp : ${allEmployee}">
+		                       <div class="d-flex justify-content-between align-items-center mb-2">
+		                           <b th:text="${emp.employeeName}">Name</b>
+
+		                           <span>
+		                               <i class="fa-solid fa-cake-candles text-danger"
+		                                  th:if="${emp.dateOfBirth != null}"></i>
+		                               <span th:text="${emp.dateOfBirth}">DOB</span>
+		                           </span>
+		                       </div>
+		                   </div>
+
+		                   <div th:if="${#lists.isEmpty(allEmployee)}"
+		                        class="text-center text-muted">
+		                       No data available
+		                   </div>
+
+		               </div>
+		           </div>
+		       </div>
+
+		   </div>
+  
+</section>
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
